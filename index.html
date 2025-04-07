@@ -1,377 +1,676 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KMDV | Fashion Hub</title>
-    <link rel="stylesheet" href="style.css">
-    <style>
-        body {
-            background-image: url("Nike-Logo-1978-present.jpg");
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
-        .product-list {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 30px;
-        }
-        .product-item {
-            text-align: center;
-            background-color: #222;
-            padding: 20px;
-            border-radius: 10px;
-            width: 250px;
-            margin: 10px;
-        }
-        .product-item img {
-            width: 100%;
-            height: auto;
-            border-radius: 5px;
-        }
-        .product-item h3 {
-            margin-top: 10px;
-            font-size: 1.5em;
-        }
-        .product-item p {
-            color: #f00;
-            margin-top: 10px;
-            font-size: 1.2em;
-        }
-        .product-item button {
-            background-color: #f00;
-            color: #fff;
-            padding: 10px 20px;
-            font-size: 1em;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 15px;
-        }
-        .product-item button:hover {
-            background-color: #c00;
-        }
-
-        /* Popup Form Styles */
-        #form-popup {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            z-index: 9999;
-        }
-
-        /* Form Container */
-        .form-container {
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 10px;
-            text-align: center;
-            width: 300px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-        }
-
-        /* Form Heading */
-        .form-container h2 {
-            font-size: 2em;
-            margin-bottom: 20px;
-            color: #222;
-        }
-
-        /* Input Fields */
-        .form-container input {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            font-size: 1em;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background-color: #f5f5f5;
-        }
-
-        /* Focused Input Field */
-        input:focus {
-            outline: none;
-            border: 1px solid #f00;
-        }
-
-        /* Submit Button */
-        .form-container button {
-            background-color: #f00;
-            color: #fff;
-            padding: 10px 20px;
-            font-size: 1.2em;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 10px;
-            transition: background-color 0.3s;
-        }
-
-        /* Button Hover Effect */
-        .form-container button:hover {
-            background-color: #c00;
-        }
-
-        /* Close Button */
-        .form-container .close-btn {
-            background-color: #444;
-            color: #fff;
-            padding: 10px 20px;
-            font-size: 1.2em;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-
-        /* Close Button Hover Effect */
-        .form-container .close-btn:hover {
-            background-color: #333;
-        }
-
-        /* Main Content - Hidden initially */
-        #content {
-            display: none;
-        }
-
-        /* Hero Section Styles */
-        .hero {
-            text-align: center;
-            margin-top: 50px;
-        }
-
-        .hero h1 {
-            font-size: 3em;
-            margin-bottom: 20px;
-        }
-
-        .hero p {
-            font-size: 1.2em;
-        }
-
-        .hero .shop-now {
-            background-color: #f00;
-            color: #fff;
-            padding: 15px 30px;
-            font-size: 1.5em;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 20px;
-        }
-
-        .hero .shop-now:hover {
-            background-color: #c00;
-        }
-
-        /* Navbar Styles */
-        .navbar {
-            display: flex;
-            justify-content: center;
-            background-color: #222;
-            padding: 10px;
-        }
-
-        .navbar ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .navbar ul li {
-            display: inline;
-            margin: 0 15px;
-        }
-
-        .navbar ul li a {
-            color: #fff;
-            text-decoration: none;
-            font-size: 1.2em;
-            transition: color 0.3s;
-        }
-
-        .navbar ul li a:hover {
-            color: #f00;
-        }
-
-        /* Product List Styles */
-        .product-list {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 30px;
-        }
-
-        /* Product Item Styles */
-        .product-item {
-            text-align: center;
-            background-color: #222;
-            padding: 20px;
-            border-radius: 10px;
-            width: 250px;
-            margin: 10px;
-        }
-
-        .product-item img {
-            width: 100%;
-            height: auto;
-            border-radius: 5px;
-        }
-
-        .product-item h3 {
-            margin-top: 10px;
-            font-size: 1.5em;
-        }
-
-        .product-item p {
-            color: #f00;
-            margin-top: 10px;
-            font-size: 1.2em;
-        }
-
-        .product-item button {
-            background-color: #f00;
-            color: #fff;
-            padding: 10px 20px;
-            font-size: 1em;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 15px;
-        }
-
-        .product-item button:hover {
-            background-color: #c00;
-        }
-
-        /* Footer Styles */
-        footer {
-            text-align: center;
-            margin-top: 50px;
-            padding: 20px;
-            background-color: #222;
-            color: #fff;
-        }
-
-        footer p {
-            margin: 0;
-            font-size: 1em;
-        }
-
-    </style>
+    <title>KDMV | Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div id="form-popup" class="form-container">
-        <h2>Enter Your Details</h2>
-        <form id="user-form">
-            <input type="text" id="name" placeholder="Full Name" required>
-            <input type="email" id="email" placeholder="Email" required>
-            <button type="submit">Proceed</button>
-            <button type="button" class="close-btn" onclick="closeForm()">Close</button>
-        </form>
+    <!-- Login Screen (shown first) -->
+    <div class="login-screen" id="loginScreen">
+        <div class="login-container">
+            <div class="logo">
+                <a href="#">KDMV</a>
+            </div>
+            <form class="login-form" id="loginForm">
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" class="form-control" required>
+                </div>
+                <button type="submit" class="btn">Enter Store</button>
+            </form>
+        </div>
     </div>
 
-    <header class="hero" style="display:none;" id="hero-section">
-        <h1>Welcome to KMDV AHJMR</h1>
-        <p>Your go-to destination for stylish and trendy outfits</p>
-        <button class="shop-now" onclick="loadAllClothes()">Shop Now</button>
-    </header>
+    <!-- Store Content (hidden initially) -->
+    <div class="store-content" id="storeContent">
+        <!-- Top Announcement Bar -->
+        <div class="announcement-bar">
+            <p>FREE SHIPPING ON ORDERS OVER $50 | USE CODE: KDMV10 FOR 10% OFF</p>
+        </div>
 
-    <nav class="navbar" style="display:none;" id="navbar">
-        <ul>
-            <li><a href="javascript:void(0);" onclick="goHome()">Home</a></li>
-            <li><a href="#">New Arrivals</a></li>
-            <li><a href="javascript:void(0);" onclick="loadAllClothes()">All Clothes</a></li>
-            <li><a href="#">Sale</a></li>
-            <li><a href="#">Contact</a></li>
-        </ul>
-    </nav>
+        <!-- Main Navigation -->
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <a href="index.html">KDMV</a>
+                </div>
+                <div class="nav-links">
+                    <ul>
+                        <li><a href="new.html">New Arrivals</a></li>
+                        <li class="dropdown">
+                            <a href="shop.html">Shop <i class="fas fa-chevron-down"></i></a>
+                            <div class="dropdown-menu">
+                                <div class="dropdown-column">
+                                    <h4>Men</h4>
+                                    <a href="shop.html?category=men-tees">T-Shirts</a>
+                                    <a href="shop.html?category=men-hoodies">Hoodies</a>
+                                    <a href="shop.html?category=men-pants">Pants</a>
+                                </div>
+                                <div class="dropdown-column">
+                                    <h4>Women</h4>
+                                    <a href="shop.html?category=women-tees">T-Shirts</a>
+                                    <a href="shop.html?category=women-hoodies">Hoodies</a>
+                                    <a href="shop.html?category=women-pants">Pants</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li><a href="collections.html">Collections</a></li>
+                        <li><a href="about.html">About</a></li>
+                    </ul>
+                </div>
+                <div class="nav-icons">
+                    <a href="#" class="search-btn"><i class="fas fa-search"></i></a>
+                    <a href="account.html"><i class="fas fa-user"></i></a>
+                    <a href="cart.html" class="cart-btn">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span class="cart-count">0</span>
+                    </a>
+                </div>
+                <button class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </nav>
 
-    <section id="home-section" style="display:none;">
-        <h2>Featured Products</h2>
-        <div class="products">
-            <div class="product">
-                <img src="c:\Users\User\Pictures\chat-lieu-thiet-ke-ao-thun-local-brand-gia-re-dep-dkmv-black-original-tee-streetwear.webp" alt="Product 1">,                 <img src="c:\Users\User\Pictures\swagger-dmv-t-shirt-mens-t-shirt.webp" alt="Product 2">               
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Welcome To KDMV 2025</h1>
+                <p>Discover our latest premium streetwear designs</p>
+                <button id="shopNowBtn" class="btn btn-primary">Shop Now</button>
+            </div>
+            <div class="hero-slider">
+                <!-- Slides would be added here dynamically -->
+            </div>
+        </section>
+        <!-- Featured Products -->
+        <section class="featured-products">
+            <div class="section-header">
+                <h2>Best Sellers</h2>
+                <a href="shop.html" class="view-all">View All</a>
+            </div>
+            <div class="products-grid" id="featured-products">
+                <!-- Products will be loaded here from your original JS -->
+            </div>
+        </section>
 
-                <h3>Model Brand</h3>
+        <!-- Rest of your store content remains the same -->
+        <!-- ... -->
 
+    </div>
+
+    <script>
+        // Handle login form submission
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get user input
+            const userName = document.getElementById('name').value;
+            const userEmail = document.getElementById('email').value;
+            
+            // Validate inputs
+            if(!userName || !userEmail) {
+                alert('Please enter both your name and email');
+                return;
+            }
+            
+            // Store user data (optional)
+            localStorage.setItem('kdmvUserName', userName);
+            localStorage.setItem('kdmvUserEmail', userEmail);
+            
+            // Animate transition
+            const loginScreen = document.getElementById('loginScreen');
+            const storeContent = document.getElementById('storeContent');
+            
+            // Add slide-out animation
+            loginScreen.style.animation = 'slideOut 0.5s ease forwards';
+            
+            // After animation completes, show store
+            setTimeout(() => {
+                loginScreen.style.display = 'none';
+                storeContent.style.display = 'block';
+                
+                // Fade in store content
+                setTimeout(() => {
+                    storeContent.style.opacity = '1';
+                }, 50);
+                
+                // Scroll to top
+                window.scrollTo(0, 0);
+            }, 500);
+        });
+
+        // Check if user already logged in (optional)
+        document.addEventListener('DOMContentLoaded', function() {
+            const userName = localStorage.getItem('kdmvUserName');
+            if(userName) {
+                document.getElementById('loginScreen').style.display = 'none';
+                document.getElementById('storeContent').style.display = 'block';
+                document.getElementById('storeContent').style.opacity = '1';
+            }
+        });
+    </script>
+    
+    <!-- Your original JavaScript files -->
+    <script src="js/main.js"></script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KDMV | Shop All Products</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Shop Header -->
+    <section class="shop-header">
+        <h1>Shop All Products</h1>
+        <p>Discover our premium streetwear collection</p>
+    </section>
+
+    <!-- Product Grid -->
+    <div class="product-list" id="product-list">
+        <!-- Products will be loaded here by JavaScript -->
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <!-- Footer content from index.html -->
+    </footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+            // Product data
+        const products = [
+            { 
+            id: 1,
+            img: "c:\Users\User\Pictures\A13usaonutL._CLa_2140,2000_71hdU7SbEtL.png_0,0,2140,2000+0.0,0.0,2140.0,2000.0_AC_UL1500_.jpg", 
+            title: "KDMV Signature Tee", 
+            price: 49.99,
+            colors: ["Blue", "White", "Black"],
+            sizes: ["S", "M", "L", "XL"],
+            description: "Premium quality cotton tee with KDMV signature print"
+            },
+            { 
+            id: 2,
+            img: "images/products/dosiin-dkmv-dkmv-tee-original-black.jpeg", 
+            title: "KDMV Classic Tee", 
+            price: 29.99,
+            colors: ["Black", "White"],
+            sizes: ["S", "M", "L"],
+            description: "Essential black tee with minimalist KDMV logo"
+            },
+            { 
+            id: 3,
+            img: "images/products/HOODIES_0003_2-1.webp", 
+            title: "KDMV ORiO Hoodie", 
+            price: 79.99,
+            colors: ["Black", "Gray"],
+            sizes: ["M", "L", "XL"],
+            description: "Heavyweight hoodie with embroidered ORiO design"
+            },
+            { 
+            id: 4,
+            img: "images/products/sf74r_51_z_prod.jpg", 
+            title: "KDMV Sweatpants", 
+            price: 59.99,
+            colors: ["Black", "Navy"],
+            sizes: ["S", "M", "L"],
+            description: "Comfortable sweatpants with adjustable waist"
+            },
+            { 
+            id: 5,
+            img: "images/products/kansas_city_hoodie_black.webp", 
+            title: "KDMV Beer Hoodie", 
+            price: 69.99,
+            colors: ["Black", "Red"],
+            sizes: ["S", "M", "L", "XL"],
+            description: "Limited edition hoodie with specialty print"
+            },
+            { 
+            id: 6,
+            img: "images/products/pink-hoodie.webp", 
+            title: "KDMV Pink Hoodie", 
+            price: 65.99,
+            colors: ["Pink", "Lavender"],
+            sizes: ["XS", "S", "M"],
+            description: "Soft pink hoodie with oversized fit"
+                }
+            ];
+
+        const productList = document.getElementById("product-list");
+            
+        // Create product cards
+        products.forEach(product => {
+            const productItem = document.createElement("div");
+            productItem.classList.add("product-item");
+            productItem.innerHTML = `
+                    <div class="product-image-container">
+                        <img src="${product.img}" alt="${product.title}" class="product-image">
+                        <div class="product-badge">New</div>
+                        <div class="quick-view" onclick="viewDetails(${product.id})">Quick View</div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">${product.title}</h3>
+                        <div class="product-price">$${product.price.toFixed(2)}</div>
+                        <div class="product-colors">${product.colors.length} colors available</div>
+                        <div class="product-actions">
+                            <button class="btn-view" onclick="viewDetails(${product.id})">
+                                <i class="fas fa-eye"></i> Details
+                            </button>
+                            <button class="btn-cart" onclick="addToCart(${product.id})">
+                                <i class="fas fa-shopping-cart"></i> Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                `;
+                productList.appendChild(productItem);
+            });
+            
+            // View product details function
+            window.viewDetails = function(productId) {
+                const product = products.find(p => p.id === productId);
+                alert(`Viewing details for: ${product.title}\nPrice: $${product.price.toFixed(2)}\nColors: ${product.colors.join(', ')}\nSizes: ${product.sizes.join(', ')}\nDescription: ${product.description}`);
+                // In a real implementation, you would show a modal or navigate to a product page
+            };
+            
+            // Add to cart function
+            window.addToCart = function(productId) {
+                const product = products.find(p => p.id === productId);
+                alert(`${product.title} added to cart!`);
+                // In a real implementation, you would add to cart storage
+            };
+        });
+    </script>
+    <script src="js/main.js"></script>
+</body>
+</html>
+    <!-- Featured Categories -->
+    <section class="featured-categories">
+        <div class="section-header">
+            <h2>Shop by Category</h2>
+            <a href="shop.html" class="view-all">View All</a>
+        </div>
+        <div class="categories-grid">
+            <div class="category-card">
+                <img src="images/category-men.jpg" alt="Men's Collection">
+                <div class="category-overlay">
+                    <h3>Men's</h3>
+                    <a href="shop.html?category=men" class="btn btn-outline">Shop Now</a>
+                </div>
+            </div>
+            <div class="category-card">
+                <img src="images/category-women.jpg" alt="Women's Collection">
+                <div class="category-overlay">
+                    <h3>Women's</h3>
+                    <a href="shop.html?category=women" class="btn btn-outline">Shop Now</a>
+                </div>
+            </div>
+            <div class="category-card">
+                <img src="images/category-accessories.jpg" alt="Accessories">
+                <div class="category-overlay">
+                    <h3>Accessories</h3>
+                    <a href="shop.html?category=accessories" class="btn btn-outline">Shop Now</a>
+                </div>
             </div>
         </div>
     </section>
 
-    <section id="all-clothes-section" style="display:none;">
-        <h2>All Clothes</h2>
-        <div class="product-list" id="product-list">
-            <!-- Product items will be dynamically added here -->
+    <!-- Featured Products -->
+    <section class="featured-products">
+        <div class="section-header">
+            <h2>Best Sellers</h2>
+            <a href="shop.html" class="view-all">View All</a>
+        </div>
+        <div class="products-grid" id="featured-products">
+            <!-- Products loaded dynamically -->
         </div>
     </section>
 
-    <footer>
-        <p>&copy; 2025 KDMV FUCKNIGGAR | All Rights Reserved</p>
+    <!-- Brand Story -->
+    <section class="brand-story">
+        <div class="brand-content">
+            <h2>The KDMV Story</h2>
+            <p>Founded in 2020, KDMV represents urban culture through premium streetwear. Each piece is designed with attention to detail and quality materials.</p>
+            <a href="about.html" class="btn btn-outline">Learn More</a>
+        </div>
+        <div class="brand-image">
+            <img src="images/brand-story.jpg" alt="KDMV Brand Story">
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter">
+        <div class="newsletter-container">
+            <h3>Join the KDMV Community</h3>
+            <p>Subscribe to get 15% off your first order and exclusive access to new drops.</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Your email address" required>
+                <button type="submit" class="btn btn-primary">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-logo">
+                <a href="index.html">KDMV</a>
+                <p>Premium Streetwear & Urban Fashion</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h4>Shop</h4>
+                    <ul>
+                        <li><a href="shop.html?category=men">Men</a></li>
+                        <li><a href="shop.html?category=women">Women</a></li>
+                        <li><a href="shop.html?category=accessories">Accessories</a></li>
+                        <li><a href="new.html">New Arrivals</a></li>
+                        <li><a href="collections.html">Collections</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Help</h4>
+                    <ul>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="faq.html">FAQs</a></li>
+                        <li><a href="shipping.html">Shipping & Returns</a></li>
+                        <li><a href="size-guide.html">Size Guide</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>About</h4>
+                    <ul>
+                        <li><a href="about.html">Our Story</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                        <li><a href="press.html">Press</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 KDMV Clothing. All rights reserved.</p>
+            <div class="payment-methods">
+                <i class="fab fa-cc-visa"></i>
+                <i class="fab fa-cc-mastercard"></i>
+                <i class="fab fa-cc-amex"></i>
+                <i class="fab fa-cc-paypal"></i>
+                <i class="fas fa-qrcode"></i>
+            </div>
+        </div>
     </footer>
 
+    <!-- Shopping Cart Sidebar -->
+    <div class="cart-sidebar">
+        <div class="cart-header">
+            <h3>Your Cart</h3>
+            <button class="close-cart">&times;</button>
+        </div>
+        <div class="cart-items">
+            <!-- Cart items loaded dynamically -->
+        </div>
+        <div class="cart-summary">
+            <div class="cart-total">
+                <span>Subtotal</span>
+                <span class="total-price">$0.00</span>
+            </div>
+            <a href="checkout.html" class="btn btn-primary">Checkout</a>
+            <a href="shop.html" class="btn btn-outline">Continue Shopping</a>
+        </div>
+    </div>
+
+    <!-- Search Modal -->
+    <div class="search-modal">
+        <div class="search-container">
+            <button class="close-search">&times;</button>
+            <form class="search-form">
+                <input type="text" placeholder="Search for products..." autocomplete="off">
+                <button type="submit"><i class="fas fa-search"></i></button>
+            </form>
+            <div class="search-results">
+                <!-- Search results appear here -->
+            </div>
+        </div>
+    </div>
+     <!-- In the hero section, change this -->
+    
+    <script src="js/main.js"></script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KDMV | Add Product</title>
+    <style>
+        /* Style for the image upload section */
+        .image-upload-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .image-upload-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .image-upload-header h2 {
+            font-family: 'Oswald', sans-serif;
+            color: #000;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        
+        .image-upload-box {
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+            padding: 40px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+        
+        .image-upload-box:hover {
+            border-color: #888;
+            background-color: #f9f9f9;
+        }
+        
+        .image-upload-box.active {
+            border-color: #000;
+            background-color: #f0f0f0;
+        }
+        
+        .upload-icon {
+            font-size: 48px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        .image-upload-box p {
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        .btn-upload {
+            background-color: #000;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-upload:hover {
+            background-color: #333;
+        }
+        
+        #fileInput {
+            display: none;
+        }
+        
+        .preview-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .image-preview {
+            width: 150px;
+            height: 150px;
+            border-radius: 8px;
+            object-fit: cover;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        
+        .remove-image {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: rgba(255, 0, 0, 0.7);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .image-upload-container {
+                padding: 20px;
+                margin: 20px;
+            }
+            
+            .image-upload-box {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <script>
-        document.getElementById("user-form").addEventListener("submit", function(event) {
-            event.preventDefault();
-            const name = document.getElementById("name").value;
-            const email = document.getElementById("email").value;
-            if (name && email) {
-                document.getElementById("form-popup").style.display = "none";
-                document.getElementById("hero-section").style.display = "block";
-                document.getElementById("navbar").style.display = "flex";
-                document.getElementById("home-section").style.display = "block";
+        // DOM Elements
+        const dropArea = document.getElementById('dropArea');
+        const fileInput = document.getElementById('fileInput');
+        const uploadBtn = document.getElementById('uploadBtn');
+        const previewContainer = document.getElementById('previewContainer');
+        
+        // Click on upload button triggers file input
+        uploadBtn.addEventListener('click', () => {
+            fileInput.click();
+        });
+        
+        // Handle file selection
+        fileInput.addEventListener('change', function() {
+            handleFiles(this.files);
+        });
+        
+        // Drag and drop functionality
+        dropArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropArea.classList.add('active');
+        });
+        
+        ['dragleave', 'dragend'].forEach(type => {
+            dropArea.addEventListener(type, () => {
+                dropArea.classList.remove('active');
+            });
+        });
+        
+        dropArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropArea.classList.remove('active');
+            
+            if (e.dataTransfer.files.length) {
+                fileInput.files = e.dataTransfer.files;
+                handleFiles(e.dataTransfer.files);
             }
         });
-
-        function loadAllClothes() {
-            document.getElementById("home-section").style.display = "none";
-            document.getElementById("all-clothes-section").style.display = "block";
-
-            const products = [
-                { img: "c:\\Users\\User\\Pictures\\ao-thun-local-brand-dep-dkmv-blue-jersey-tee-streetwear.webp", title: "Casual Outfit", price: "$49.99" },
-                { img: "c:\\Users\\User\\Pictures\\dosiin-dkmv-dkmv-tee-original-black-111400111400.jpeg", title: "Elegant Dress", price: "$29.99" },
-                { img: "c:\\Users\\User\\Pictures\\HOODIES_0003_2-1.webp", title: "Sporty Look", price: "$29.99" },
-                { img: "c:\\Users\\User\\Pictures\\sf74r_51_z_prod.jpg", title: "Chic Top", price: "$59.99" },
-                { img: "c:\\Users\\User\\Pictures\\kansas_city_hoodie_black_1024x1024.webp", title: "Summer Shorts", price: "$39.99" },
-                { img: "c:\\Users\\User\\Pictures\\th (1).jpg", title: "Stylish Jeans", price: "$39.99" }
-            ];
-
-            const productList = document.getElementById("product-list");
-
-            products.forEach(product => {
-                const productItem = document.createElement("div");
-                productItem.classList.add("product-item");
-                productItem.innerHTML = `
-                    <img src="${product.img}" alt="${product.title}">
-                    <h3>${product.title}</h3>
-                    <p>${product.price}</p>
-                    <button onclick="viewDetails('${product.title}')">View Details</button>
-                `;
-                productList.appendChild(productItem);
-            });
-        }
-
-        function viewDetails(productName) {
-            alert("You clicked on: " + productName);
-        }
-
-        function goHome() {
-            document.getElementById("all-clothes-section").style.display = "none";
-            document.getElementById("home-section").style.display = "block";
-        }
-
-        function closeForm() {
-            document.getElementById("form-popup").style.display = "none";
+        
+        // Process selected files
+        function handleFiles(files) {
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                
+                // Check if file is an image
+                if (!file.type.match('image.*')) continue;
+                
+                // Check file size (5MB max)
+                if (file.size > 5 * 1024 * 1024) {
+                    alert('File too large: ' + file.name + ' (max 5MB)');
+                    continue;
+                }
+                
+                // Create preview
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    const preview = document.createElement('div');
+                    preview.style.position = 'relative';
+                    preview.style.display = 'inline-block';
+                    
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.classList.add('image-preview');
+                    
+                    const removeBtn = document.createElement('button');
+                    removeBtn.innerHTML = '&times;';
+                    removeBtn.classList.add('remove-image');
+                    removeBtn.addEventListener('click', () => {
+                        preview.remove();
+                    });
+                    
+                    preview.appendChild(img);
+                    preview.appendChild(removeBtn);
+                    previewContainer.appendChild(preview);
+                }
+                
+                reader.readAsDataURL(file);
+            }
         }
     </script>
 </body>
