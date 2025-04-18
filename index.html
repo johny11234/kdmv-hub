@@ -2,9 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KDMV | Login</title>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,7 +13,7 @@
     <div class="login-screen" id="loginScreen">
         <div class="login-container">
             <div class="logo">
-                <a href="#">KDMV</a>
+                <a href="#">KDOR</a>
             </div>
             <form class="login-form" id="loginForm">
                 <div class="form-group">
@@ -35,39 +33,16 @@
     <div class="store-content" id="storeContent">
         <!-- Top Announcement Bar -->
         <div class="announcement-bar">
-            <p>FREE SHIPPING ON ORDERS OVER $50 | USE CODE: KDMV10 FOR 10% OFF</p>
+            <p>HG TAH JOL MERL HZ OT TINH JOYMRAY HZ HG</p>
         </div>
 
         <!-- Main Navigation -->
         <nav class="navbar">
             <div class="nav-container">
                 <div class="logo">
-                    <a href="index.html">KDMV</a>
+                    <a href="index.html">KDOR</a>
                 </div>
-                <div class="nav-links">
-                    <ul>
-                        <li><a href="new.html">New Arrivals</a></li>
-                        <li class="dropdown">
-                            <a href="shop.html">Shop <i class="fas fa-chevron-down"></i></a>
-                            <div class="dropdown-menu">
-                                <div class="dropdown-column">
-                                    <h4>Men</h4>
-                                    <a href="shop.html?category=men-tees">T-Shirts</a>
-                                    <a href="shop.html?category=men-hoodies">Hoodies</a>
-                                    <a href="shop.html?category=men-pants">Pants</a>
-                                </div>
-                                <div class="dropdown-column">
-                                    <h4>Women</h4>
-                                    <a href="shop.html?category=women-tees">T-Shirts</a>
-                                    <a href="shop.html?category=women-hoodies">Hoodies</a>
-                                    <a href="shop.html?category=women-pants">Pants</a>
-                                </div>
-                            </div>
-                        </li>
-                        <li><a href="collections.html">Collections</a></li>
-                        <li><a href="about.html">About</a></li>
-                    </ul>
-                </div>
+                
                 <div class="nav-icons">
                     <a href="#" class="search-btn"><i class="fas fa-search"></i></a>
                     <a href="account.html"><i class="fas fa-user"></i></a>
@@ -85,29 +60,7 @@
         </nav>
 
         <!-- Hero Section -->
-        <section class="hero">
-            <div class="hero-content">
-                <h1>Welcome To KDMV 2025</h1>
-                <p>Discover our latest premium streetwear designs</p>
-                <button id="shopNowBtn" class="btn btn-primary">Shop Now</button>
-            </div>
-            <div class="hero-slider">
-                <!-- Slides would be added here dynamically -->
-            </div>
-        </section>
-        <!-- Featured Products -->
-        <section class="featured-products">
-            <div class="section-header">
-                <h2>Best Sellers</h2>
-                <a href="shop.html" class="view-all">View All</a>
-            </div>
-            <div class="products-grid" id="featured-products">
-                <!-- Products will be loaded here from your original JS -->
-            </div>
-        </section>
 
-        <!-- Rest of your store content remains the same -->
-        <!-- ... -->
 
     </div>
 
@@ -199,62 +152,55 @@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
             // Product data
-        const products = [
-            { 
-            id: 1,
-            img: "c:\Users\User\Pictures\A13usaonutL._CLa_2140,2000_71hdU7SbEtL.png_0,0,2140,2000+0.0,0.0,2140.0,2000.0_AC_UL1500_.jpg", 
-            title: "KDMV Signature Tee", 
-            price: 49.99,
-            colors: ["Blue", "White", "Black"],
-            sizes: ["S", "M", "L", "XL"],
-            description: "Premium quality cotton tee with KDMV signature print"
-            },
-            { 
-            id: 2,
-            img: "images/products/dosiin-dkmv-dkmv-tee-original-black.jpeg", 
-            title: "KDMV Classic Tee", 
-            price: 29.99,
-            colors: ["Black", "White"],
-            sizes: ["S", "M", "L"],
-            description: "Essential black tee with minimalist KDMV logo"
-            },
-            { 
-            id: 3,
-            img: "images/products/HOODIES_0003_2-1.webp", 
-            title: "KDMV ORiO Hoodie", 
-            price: 79.99,
-            colors: ["Black", "Gray"],
-            sizes: ["M", "L", "XL"],
-            description: "Heavyweight hoodie with embroidered ORiO design"
-            },
-            { 
-            id: 4,
-            img: "images/products/sf74r_51_z_prod.jpg", 
-            title: "KDMV Sweatpants", 
-            price: 59.99,
-            colors: ["Black", "Navy"],
-            sizes: ["S", "M", "L"],
-            description: "Comfortable sweatpants with adjustable waist"
-            },
-            { 
-            id: 5,
-            img: "images/products/kansas_city_hoodie_black.webp", 
-            title: "KDMV Beer Hoodie", 
-            price: 69.99,
-            colors: ["Black", "Red"],
-            sizes: ["S", "M", "L", "XL"],
-            description: "Limited edition hoodie with specialty print"
-            },
-            { 
-            id: 6,
-            img: "images/products/pink-hoodie.webp", 
-            title: "KDMV Pink Hoodie", 
-            price: 65.99,
-            colors: ["Pink", "Lavender"],
-            sizes: ["XS", "S", "M"],
-            description: "Soft pink hoodie with oversized fit"
-                }
-            ];
+       // Product data
+    const products = [
+    { 
+        id: 1,
+        img: "HOODIES_0003_2-1.webp", 
+        title: "KDMV ORiO Hoodie", 
+        price: 79.99,
+        colors: ["Black", "Gray"],
+        sizes: ["M", "L", "XL"],
+        description: "Heavyweight hoodie with 'Katny. Is Life. GOOD FOR YOUR SOUL.' design"
+    },
+    { 
+        id: 2,
+        img: "sf74r_51_z_prod.jpg", 
+        title: "KDMV Numbered Tee", 
+        price: 49.99,
+        colors: ["White", "Black"],
+        sizes: ["S", "M", "L", "XL"],
+        description: "Premium cotton tee with numbered design options"
+    },
+    { 
+        id: 3,
+        img: "kansas_city_hoodie_black_1024x1024.webp", 
+        title: "KDMV Kansas City Hoodie", 
+        price: 89.99,
+        colors: ["Black"],
+        sizes: ["S", "M", "L", "XL"],
+        description: "Comfortable hoodie with 'NANSAS CITY' and 'NOOKIE POCKET' design"
+    },
+    { 
+        id: 4,
+        img: "images/products/dosiin-dkmv-dkmv-tee-original-black.jpeg", 
+        title: "KDMV Classic Tee", 
+        price: 29.99,
+        colors: ["Black", "White"],
+        sizes: ["S", "M", "L"],
+        description: "Essential black tee with minimalist KDMV logo"
+    },
+    { 
+        id: 5,
+        img: "images/products/pink-hoodie.webp", 
+        title: "KDMV Pink Hoodie", 
+        price: 65.99,
+        colors: ["Pink", "Lavender"],
+        sizes: ["XS", "S", "M"],
+        description: "Soft pink hoodie with oversized fit"
+    }
+];
+            
 
         const productList = document.getElementById("product-list");
             
@@ -298,41 +244,11 @@
                 alert(`${product.title} added to cart!`);
                 // In a real implementation, you would add to cart storage
             };
+            
         });
+        
     </script>
     <script src="js/main.js"></script>
-</body>
-</html>
-    <!-- Featured Categories -->
-    <section class="featured-categories">
-        <div class="section-header">
-            <h2>Shop by Category</h2>
-            <a href="shop.html" class="view-all">View All</a>
-        </div>
-        <div class="categories-grid">
-            <div class="category-card">
-                <img src="images/category-men.jpg" alt="Men's Collection">
-                <div class="category-overlay">
-                    <h3>Men's</h3>
-                    <a href="shop.html?category=men" class="btn btn-outline">Shop Now</a>
-                </div>
-            </div>
-            <div class="category-card">
-                <img src="images/category-women.jpg" alt="Women's Collection">
-                <div class="category-overlay">
-                    <h3>Women's</h3>
-                    <a href="shop.html?category=women" class="btn btn-outline">Shop Now</a>
-                </div>
-            </div>
-            <div class="category-card">
-                <img src="images/category-accessories.jpg" alt="Accessories">
-                <div class="category-overlay">
-                    <h3>Accessories</h3>
-                    <a href="shop.html?category=accessories" class="btn btn-outline">Shop Now</a>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- Featured Products -->
     <section class="featured-products">
@@ -349,11 +265,11 @@
     <section class="brand-story">
         <div class="brand-content">
             <h2>The KDMV Story</h2>
-            <p>Founded in 2020, KDMV represents urban culture through premium streetwear. Each piece is designed with attention to detail and quality materials.</p>
+            <p>Founded in 2025,KDOR BRAND MAKE BY KMENG KHMER SMOS SNEA. Tinh hz steav.</p>
             <a href="about.html" class="btn btn-outline">Learn More</a>
         </div>
         <div class="brand-image">
-            <img src="images/brand-story.jpg" alt="KDMV Brand Story">
+            <img src="c:\Users\User\Pictures\OIP.jpg" alt="Kdor basbombastic">
         </div>
     </section>
 
@@ -673,5 +589,25 @@
             }
         }
     </script>
+    <!-- Shopping Cart Sidebar -->
+<div class="cart-sidebar">
+    <div class="cart-header">
+        <h3>Your Cart</h3>
+        <button class="close-cart" onclick="document.querySelector('.cart-sidebar').classList.remove('open')">
+            &times;
+        </button>
+    </div>
+    <div class="cart-items">
+        <!-- Cart items will be added here dynamically -->
+    </div>
+    <div class="cart-summary">
+        <div class="cart-total">
+            <span>Total</span>
+            <span class="total-price">$0.00</span>
+        </div>
+        <button class="btn btn-primary" onclick="location.href='checkout.html'">Checkout</button>
+    </div>
+</div>
 </body>
 </html>
+<!-- Shopping Cart Sidebar -->

@@ -185,144 +185,6 @@ function viewProduct(productId) {
 }
 
 // Add to Cart Functionality
-let cart = [];
-
-function addToCart(productId) {
-    const product = products.find(p => p.id === productId);
-    const existingItem = cart.find(item => item.id === productId);
-    
-    if (existingItem) {
-        existingItem.quantity += 1;
-    } else {
-        cart.push({
-            ...product,
-            quantity: 1
-        });
-    }
-    
-    updateCartUI();
-    alert(`${product.title} added to cart!`);
-}
-
-function updateCartUI() {
-    const cartItems = document.querySelector('.cart-items');
-    const cartCount = document.querySelector('.cart-count');
-    const totalPrice = document.querySelector('.total-price');
-    
-    // Update cart items
-    cartItems.innerHTML = '';
-    
-    let total = 0;
-    
-    cart.forEach(item => {
-        const cartItem = document.createElement('div');
-        cartItem.className = 'cart-item';
-        
-        cartItem.innerHTML = `
-            <div class="cart-item-image">
-                <img src="${item.image}" alt="${item.title}">
-            </div>
-            <div class="cart-item-details">
-                <h4 class="cart-item-title">${item.title}</h4>
-                <p class="cart-item-price">$${item.price.toFixed(2)}</p>
-                <div class="cart-item-actions">
-                    <div class="cart-item-quantity">
-                        <button onclick="updateQuantity(${item.id}, -1)">-</button>
-                        <span>${item.quantity}</span>
-                        <button onclick="updateQuantity(${item.id}, 1)">+</button>
-                    </div>
-                    <span class="remove-item" onclick="removeFromCart(${item.id})">Remove</span>
-                </div>
-            </div>
-        `;
-        
-        cartItems.appendChild(cartItem);
-        total += item.price * item.quantity;
-    });
-    
-    // Update cart count and total
-    cartCount.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
-    totalPrice.textContent = `$${total.toFixed(2)}`;
-}
-
-function updateQuantity(productId, change) {
-    const item = cart.find(item => item.id === productId);
-    
-    if (item) {
-        item.quantity += change;
-        
-        if (item.quantity <= 0) {
-            cart = cart.filter(item => item.id !== productId);
-        }
-        
-        updateCartUI();
-    }
-}
-
-function removeFromCart(productId) {
-    cart = cart.filter(item => item.id !== productId);
-    updateCartUI();
-}
-
-// Initialize the page
-document.addEventListener('DOMContentLoaded', () => {
-    loadFeaturedProducts();
-    
-    // Close modals when clicking outside
-    document.addEventListener('click', (e) => {
-        if (e.target === searchModal) {
-            searchModal.classList.remove('open');
-        }
-    });
-    
-    // Close cart when clicking outside
-    document.addEventListener('click', (e) => {
-        if (!cartSidebar.contains(e.target) && e.target !== cartBtn) {
-            cartSidebar.classList.remove('open');
-        }
-    });
-});
-
-// Scroll Animation Trigger
-function animateOnScroll() {
-    const elements = document.querySelectorAll('.scroll-animate');
-    elements.forEach(element => {
-        const elementTop = element.getBoundingClientRect().top;
-        const elementBottom = element.getBoundingClientRect().bottom;
-        const viewportHeight = window.innerHeight;
-
-        if (elementTop < viewportHeight * 0.85 && elementBottom > 0) {
-            element.classList.add('visible');
-        }
-    });
-}
-
-window.addEventListener('scroll', animateOnScroll);
-window.addEventListener('load', animateOnScroll);
-
-// Navbar Hide/Show on Scroll
-let lastScroll = 0;
-window.addEventListener('scroll', () => {
-    const currentScroll = window.pageYOffset;
-    const navbar = document.querySelector('.navbar');
-
-    if (currentScroll > lastScroll && currentScroll > 100) {
-        navbar.classList.add('hidden');
-    } else {
-        navbar.classList.remove('hidden');
-    }
-    lastScroll = currentScroll;
-});
-
-// Parallax Effect
-window.addEventListener('scroll', () => {
-    document.querySelectorAll('.parallax-item').forEach(item => {
-        const speed = parseFloat(item.dataset.speed) || 0.3;
-        const yPos = -window.pageYOffset * speed;
-        item.style.transform = `translateY(${yPos}px)`;
-    });
-});
-
 
 function loadAllClothes() {
     // Hide home section and show clothes section with smooth transition
@@ -448,7 +310,152 @@ function showQRCode(productTitle, price) {
     console.log("Showing QR code for:", productTitle, "Price:", price);
     document.getElementById("qr-popup").style.display = "flex";
 }
+// Cart functionality
+let cart = [];
 
+function addToCart(productId, selectedColor = 'Black') {
+    const product = products.find(p => p.id === productId);
+    
+    if (!product) return;
+    
+    // Check if product already exists in cart
+    const existingItem = cart.find(item => 
+        item.id === productId && item.color === selectedColor
+    );
+    
+    if (existingItem) {
+        existingItem.quantity += 1;
+    } else {
+        cart.push({
+            ...product,
+            color: selectedColor,
+            quantity: 1
+        });
+    }
+    
+    updateCartUI();
+    updateCartCount();
+    showCart(); // Automatically show cart when adding items
+}
+
+function updateCartCount() {
+    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+    document.querySelector('.cart-count').textContent = totalItems;
+}
+
+function showCart() {
+    document.querySelector('.cart-sidebar').classList.add('open');
+}
+
+function updateCartUI() {
+    const cartItems = document.querySelector('.cart-items');
+    const cartTotal = document.querySelector('.total-price');
+    
+    cartItems.innerHTML = '';
+    
+    let total = 0;
+    
+    cart.forEach(item => {
+        const cartItem = document.createElement('div');
+        cartItem.className = 'cart-item';
+        cartItem.innerHTML = `
+            <div class="cart-item-image">
+                <img src="${item.img}" alt="${item.title}">
+            </div>
+            <div class="cart-item-details">
+                <h4>${item.title}</h4>
+                <p>Color: ${item.color}</p>
+                <p>$${item.price.toFixed(2)} × ${item.quantity}</p>
+                <div class="cart-item-actions">
+                    <button onclick="updateCartItem(${item.id}, '${item.color}', -1)">-</button>
+                    <span>${item.quantity}</span>
+                    <button onclick="updateCartItem(${item.id}, '${item.color}', 1)">+</button>
+                    <button onclick="removeFromCart(${item.id}, '${item.color}')">Remove</button>
+                </div>
+            </div>
+        `;
+        cartItems.appendChild(cartItem);
+        total += item.price * item.quantity;
+    });
+    
+    cartTotal.textContent = `$${total.toFixed(2)}`;
+}
+
+function updateCartItem(productId, color, change) {
+    const item = cart.find(item => 
+        item.id === productId && item.color === color
+    );
+    
+    if (item) {
+        item.quantity += change;
+        
+        if (item.quantity <= 0) {
+            cart = cart.filter(i => !(i.id === productId && i.color === color));
+        }
+        
+        updateCartUI();
+        updateCartCount();
+    }
+}
+
+function removeFromCart(productId, color) {
+    cart = cart.filter(item => !(item.id === productId && item.color === color));
+    updateCartUI();
+    updateCartCount();
+}
+
+// Update product cards to include color selection
+function createProductCards() {
+    const productList = document.getElementById("product-list");
+    productList.innerHTML = "";
+    
+    products.forEach(product => {
+        const productItem = document.createElement("div");
+        productItem.classList.add("product-item");
+        
+        productItem.innerHTML = `
+            <div class="product-image-container">
+                <img src="${product.img}" alt="${product.title}" class="product-image">
+                <div class="product-badge">New</div>
+            </div>
+            <div class="product-info">
+                <h3 class="product-title">${product.title}</h3>
+                <div class="product-price">$${product.price.toFixed(2)}</div>
+                
+                <div class="color-selection">
+                    <label>Color:</label>
+                    <select class="color-select" id="color-${product.id}">
+                        ${product.colors.map(color => 
+                            `<option value="${color}">${color}</option>`
+                        ).join('')}
+                    </select>
+                </div>
+                
+                <div class="product-actions">
+                    <button class="btn-cart" onclick="addToCart(${product.id}, document.getElementById('color-${product.id}').value)">
+                        <i class="fas fa-shopping-cart"></i> Add to Cart
+                    </button>
+                </div>
+            </div>
+        `;
+        productList.appendChild(productItem);
+    });
+}
+
+// Initialize the page
+document.addEventListener('DOMContentLoaded', () => {
+    createProductCards();
+    
+    // Close cart when clicking outside
+    document.addEventListener('click', (e) => {
+        const cartSidebar = document.querySelector('.cart-sidebar');
+        const cartBtn = document.querySelector('.cart-btn');
+        
+        if (!cartSidebar.contains(e.target) && e.target !== cartBtn) {
+            cartSidebar.classList.remove('open');
+        }
+    });
+});
 
 
 
